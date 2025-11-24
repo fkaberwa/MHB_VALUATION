@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/mhbdb
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8080
+
+jwt:
+  secret: "wLxWi2+X34p7iH9LJrTjZ4qAABjvW8lmh3x3VQ9uMyx4jUQhvEew8+F8S3uPCMLN"
+  access-token-expiration-ms: 777600000   # 9 days
+  refresh-token-expiration-ms: 1209600000 # 14 days
