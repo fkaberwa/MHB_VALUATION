@@ -24,7 +24,7 @@ public class CustomerCreationDto {
     // Accepts +255(0) 755 876 985
     @Pattern(
             regexp = "^\\+255\\(0\\)\\s\\d{3}\\s\\d{3}\\s\\d{3}$",
-            message = "Contact must match +255(0) 755 876 985"
+            message = "Contact must match +255(0) xxx xxx xxx"
     )
     private String contact;
 

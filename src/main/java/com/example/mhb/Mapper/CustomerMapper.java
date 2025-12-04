@@ -2,12 +2,10 @@ package com.example.mhb.Mapper;
 
 import com.example.mhb.dto.CustomerCreationDto;
 import com.example.mhb.entity.Customer;
-import org.springframework.lang.NonNull;
 
 public class CustomerMapper {
 
-    @NonNull
-    public static Customer toEntity(@NonNull CustomerCreationDto dto) {
+    public static Customer toEntity(CustomerCreationDto dto) {
         Customer c = new Customer();
         c.setName(dto.getName());
         c.setNida(dto.getNida());
@@ -17,8 +15,7 @@ public class CustomerMapper {
         return c;
     }
 
-    @NonNull
-    public static CustomerCreationDto toDto(@NonNull Customer entity) {
+    public static CustomerCreationDto toDto(Customer entity) {
         CustomerCreationDto dto = new CustomerCreationDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());

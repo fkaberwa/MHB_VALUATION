@@ -55,8 +55,10 @@ public class AuthController {
     // LOGIN - returns access + refresh tokens
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDto request) {
-    System.out.println("===============================================================");       
-        log.info("===========================================  Reached here {} ", request.getUsername());
+
+   // System.out.println("===============================================================");       
+      //  log.info("===========================================  Reached here {} ", request.getUsername());
+      
         Optional<Staff> optionalStaff = repo.findByUsername(request.getUsername());
 
         if (optionalStaff.isEmpty() || !passwordEncoder.matches(request.getPassword(), optionalStaff.get().getPassword())) {

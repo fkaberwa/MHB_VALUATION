@@ -38,8 +38,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         final String authHeader = request.getHeader("Authorization");
 
-        log.info("======== JWT AUTH FILTER REACHED for path: {} ========", path);
-        System.out.println("======== JWT AUTH FILTER REACHED for path: " + path + " ========");
+        //log.info("======== JWT AUTH FILTER REACHED for path: {} ========", path);
+        //System.out.println("======== JWT AUTH FILTER REACHED for path: " + path + " ========");
         if (path.startsWith("/api/auth/login") || path.startsWith("/api/auth/refresh")) {
             filterChain.doFilter(request, response);
             return;
