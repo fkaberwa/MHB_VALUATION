@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import com.example.mhb.dto.*;
+import com.example.mhb.dto.auth.LoginRequestDto;
 import com.example.mhb.entity.Staff;
 import com.example.mhb.repository.StaffRepository;
 import com.example.mhb.security.JwtService;
@@ -55,8 +56,10 @@ public class AuthController {
     // LOGIN - returns access + refresh tokens
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDto request) {
-    System.out.println("===============================================================");       
-        log.info("===========================================  Reached here {} ", request.getUsername());
+
+   // System.out.println("===============================================================");       
+      //  log.info("===========================================  Reached here {} ", request.getUsername());
+      
         Optional<Staff> optionalStaff = repo.findByUsername(request.getUsername());
 
         if (optionalStaff.isEmpty() || !passwordEncoder.matches(request.getPassword(), optionalStaff.get().getPassword())) {
