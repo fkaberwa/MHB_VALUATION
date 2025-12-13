@@ -1,11 +1,11 @@
-package com.example.mhb.Mapper;
+package com.example.mhb.mapper;
 
-import com.example.mhb.dto.CustomerCreationDto;
+import com.example.mhb.dto.customer.CustomerCreateDto;
 import com.example.mhb.entity.Customer;
 
 public class CustomerMapper {
 
-    public static Customer toEntity(CustomerCreationDto dto) {
+    public static Customer toEntity(CustomerCreateDto dto) {
         Customer c = new Customer();
         c.setName(dto.getName());
         c.setNida(dto.getNida());
@@ -15,8 +15,8 @@ public class CustomerMapper {
         return c;
     }
 
-    public static CustomerCreationDto toDto(Customer entity) {
-        CustomerCreationDto dto = new CustomerCreationDto();
+    public static CustomerCreateDto toDto(Customer entity) {
+        CustomerCreateDto dto = new CustomerCreateDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setNida(entity.getNida());

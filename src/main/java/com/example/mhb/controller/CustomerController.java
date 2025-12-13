@@ -7,14 +7,15 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.example.mhb.repository.CustomerRepository;
 import com.example.mhb.entity.Customer;
-import com.example.mhb.dto.CustomerCreationDto;
-import com.example.mhb.Mapper.CustomerMapper;
+import com.example.mhb.mapper.CustomerMapper;
+import com.example.mhb.dto.customer.CustomerCreateDto;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.lang.NonNull;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -27,14 +28,16 @@ public class CustomerController {
         this.repo = repo;
     }
 
-    // Removes all @NonNull warnings
-    private @NonNull Customer getCustomerOrThrow(long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Customer not found with ID: " + id));
+    // Helper: find or throw (returns non-null by contract via orElseThrow)
+    private Customer getCustomerOrThrow(long id) {
+        return Objects.requireNonNull(
+                repo.findById(id).orElseThrow(() -> new RuntimeException("Customer not found with ID: " + id)),
+                "Customer should not be null"
+        );
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody CustomerCreationDto dto) {
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody CustomerCreateDto dto) {
         log.info("Creating customer - name={}, nida={}, contact={}", dto.getName(), dto.getNida(), dto.getContact());
 
         // FIXED: was .isPresent() → now .isEmpty()
@@ -44,9 +47,9 @@ public class CustomerController {
         if (dto.getContact() != null && !dto.getContact().isBlank() && !repo.findByContact(dto.getContact()).isEmpty()) {
             throw new RuntimeException("Customer with this contact already exists.");
         }
-
-        Customer entity = CustomerMapper.toEntity(dto);
-        Customer saved = repo.save(entity);
+            
+            Customer entity = CustomerMapper.toEntity(dto);
+            Customer saved = Objects.requireNonNull(repo.save(entity), "Saved customer should not be null");
 
         Map<String, Object> response = Map.of(
             "message", "Customer created successfully",
@@ -57,7 +60,7 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> all() {
-        List<CustomerCreationDto> customers = repo.findAll().stream()
+        List<CustomerCreateDto> customers = repo.findAll().stream()
                 .map(CustomerMapper::toDto)
                 .toList();
 
@@ -81,7 +84,7 @@ public class CustomerController {
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> search(@RequestParam String q) {
-        List<CustomerCreationDto> results = repo.findByNameContainingIgnoreCase(q).stream()
+        List<CustomerCreateDto> results = repo.findByNameContainingIgnoreCase(q).stream()
                 .map(CustomerMapper::toDto)
                 .toList();
 
@@ -94,7 +97,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> update(@PathVariable long id, @Valid @RequestBody CustomerCreationDto dto) {
+    public ResponseEntity<Map<String, Object>> update(@PathVariable long id, @Valid @RequestBody CustomerCreateDto dto) {
         Customer customer = getCustomerOrThrow(id);
 
         if (dto.getNida() != null && !dto.getNida().isBlank() && !dto.getNida().equals(customer.getNida())
@@ -112,7 +115,7 @@ public class CustomerController {
         customer.setGender (dto.getGender());
         customer.setIdType(dto.getNida() != null && !dto.getNida().isBlank() ? "NIDA" : "Blank");
 
-        Customer updated = repo.save(customer);
+            Customer updated = Objects.requireNonNull(repo.save(customer), "Updated customer should not be null");
 
         Map<String, Object> response = Map.of(
             "message", "Customer updated successfully",
@@ -150,7 +153,7 @@ public class CustomerController {
             }
         });
 
-        Customer updated = repo.save(customer);
+            Customer updated = Objects.requireNonNull(repo.save(customer), "Updated customer should not be null");
         Map<String, Object> response = Map.of(
             "message", "Customer partially updated successfully",
             "customer", CustomerMapper.toDto(updated)

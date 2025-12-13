@@ -1,6 +1,5 @@
 com\example\mhb\entity\Staff.class
 com\example\mhb\config\DataInitializer.class
-META-INF\spring-configuration-metadata.json
 com\example\mhb\config\JwtProperties.class
 com\example\mhb\repository\ValuationFormRepository.class
 com\example\mhb\config\SecurityConfig.class

@@ -5,17 +5,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.example.mhb.entity.ValuationForm;
 import com.example.mhb.entity.Customer;
-import com.example.mhb.repository.ValuationFormRepository;
+import com.example.mhb.repository.ValuationRepository;
 import com.example.mhb.repository.CustomerRepository;
 
 @RestController
 @RequestMapping("/api/valuation-forms")
-public class ValuationFormController {
+public class ValuationController {
 
-    private final ValuationFormRepository repo;
+    private final ValuationRepository repo;
     private final CustomerRepository customerRepo;
 
-    public ValuationFormController(ValuationFormRepository repo, CustomerRepository customerRepo) {
+    public ValuationController(ValuationRepository repo, CustomerRepository customerRepo) {
         this.repo = repo;
         this.customerRepo = customerRepo;
     }

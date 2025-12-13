@@ -1,4 +1,4 @@
-package com.example.mhb.dto;
+package com.example.mhb.dto.auth;
 
 import jakarta.validation.constraints.*;
 
