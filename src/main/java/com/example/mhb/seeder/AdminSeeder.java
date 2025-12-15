@@ -16,7 +16,7 @@ public class AdminSeeder {
             PasswordEncoder passwordEncoder) {
 
         return args -> {
-            if (adminRepository.findByUsername("admin").isEmpty()) {
+            if (adminRepository.findByUsername("mmihayo").isEmpty()) {
 
                 Admin admin = new Admin();
                 admin.setUsername("mmihayo");
@@ -26,7 +26,7 @@ public class AdminSeeder {
 
                 adminRepository.save(admin);
 
-                System.out.println("✔ Default admin created: username=admin, password=Admin@123");
+                System.out.println("✔ Default admin created: username=mmihayo, password=Admin@123");
             }
         };
     }

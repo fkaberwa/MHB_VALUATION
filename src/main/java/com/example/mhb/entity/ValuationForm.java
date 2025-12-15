@@ -2,6 +2,9 @@ package com.example.mhb.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import com.example.mhb.entity.enums.CollateralType;
+import com.example.mhb.entity.enums.OwnershipType;
+import com.example.mhb.entity.enums.ValuationStatus;
 
 @Entity
 @Table(name = "valuations")
@@ -14,8 +17,11 @@ public class ValuationForm {
     @ManyToOne(optional = false)
     private Customer customer;
 
-    private String collateralType;
-    private String ownershipType;
+    @Enumerated(EnumType.STRING)
+    private CollateralType collateralType;
+
+    @Enumerated(EnumType.STRING)
+    private OwnershipType ownershipType;
 
     private String ownerFullName;
     private String spouseOneName;
@@ -30,7 +36,8 @@ public class ValuationForm {
     private BigDecimal forcedSaleValue;
     private BigDecimal marketValue;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private ValuationStatus status;
 
     // ===== GETTERS & SETTERS =====
 
@@ -46,19 +53,19 @@ public class ValuationForm {
         this.customer = customer;
     }
 
-    public String getCollateralType() {
+    public CollateralType getCollateralType() {
         return collateralType;
     }
 
-    public void setCollateralType(String collateralType) {
+    public void setCollateralType(CollateralType collateralType) {
         this.collateralType = collateralType;
     }
 
-    public String getOwnershipType() {
+    public OwnershipType getOwnershipType() {
         return ownershipType;
     }
 
-    public void setOwnershipType(String ownershipType) {
+    public void setOwnershipType(OwnershipType ownershipType) {
         this.ownershipType = ownershipType;
     }
 
@@ -134,11 +141,11 @@ public class ValuationForm {
         this.marketValue = marketValue;
     }
 
-    public String getStatus() {
+    public ValuationStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ValuationStatus status) {
         this.status = status;
     }
 }

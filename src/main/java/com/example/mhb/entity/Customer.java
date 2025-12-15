@@ -1,6 +1,7 @@
 package com.example.mhb.entity;
 
 import jakarta.persistence.*;
+import com.example.mhb.entity.enums.Gender;
 
 @Entity
 @Table(name = "customers")
@@ -13,7 +14,8 @@ public class Customer {
     private String name;
     private String nida;
     private String contact;
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     private String idType;
 
     // ===== GETTERS & SETTERS =====
@@ -46,11 +48,11 @@ public class Customer {
         this.contact = contact;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

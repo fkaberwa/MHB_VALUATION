@@ -2,7 +2,7 @@ package com.example.mhb.service;
 
 import com.example.mhb.dto.customer.CustomerCreateDto;
 import com.example.mhb.entity.Customer;
-import com.example.mhb.mapper.CustomerMapper;
+import com.example.mhb.Mapper.CustomerMapper;
 import com.example.mhb.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
