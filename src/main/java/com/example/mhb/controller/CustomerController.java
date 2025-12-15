@@ -7,6 +7,7 @@ import com.example.mhb.Mapper.CustomerMapper;
 import com.example.mhb.repository.CustomerRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponseDto> byId(@PathVariable Long id) {
+    public ResponseEntity<CustomerResponseDto> byId(@PathVariable @NonNull Long id) {
         Customer c = repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
@@ -58,7 +59,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable @NonNull Long id) {
         repo.deleteById(id);
         return ResponseEntity.noContent().build();
     }

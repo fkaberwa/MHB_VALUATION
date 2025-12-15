@@ -7,6 +7,7 @@ import com.example.mhb.Mapper.ValuationMapper;
 import com.example.mhb.repository.CustomerRepository;
 import com.example.mhb.repository.ValuationRepository;
 import org.springframework.stereotype.Service;
+import java.util.Objects;
 
 @Service
 public class ValuationService {
@@ -23,7 +24,9 @@ public class ValuationService {
     }
 
     public ValuationForm create(ValuationCreateDto dto) {
-        Customer customer = customerRepo.findById(dto.getCustomerId())
+        Long customerId = Objects.requireNonNull(dto.getCustomerId(), "Customer ID is required");
+
+        Customer customer = customerRepo.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
         ValuationForm valuation =

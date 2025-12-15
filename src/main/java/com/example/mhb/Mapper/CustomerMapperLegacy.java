@@ -1,4 +1,4 @@
-package com.example.mhb.mapper.legacy;
+package com.example.mhb.Mapper;
 
 import com.example.mhb.dto.customer.CustomerCreateDto;
 import com.example.mhb.dto.customer.CustomerResponseDto;

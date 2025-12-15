@@ -10,6 +10,8 @@ import com.example.mhb.security.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+
 @Service
 public class AuthService {
 
@@ -30,6 +32,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // 🔐 LOGIN
     public TokenResponseDto login(LoginRequestDto request) {
 
         Admin admin = adminRepository.findByUsername(request.getUsername())
@@ -43,44 +46,46 @@ public class AuthService {
         String refreshToken = jwtService.generateRefreshToken(admin.getUsername());
 
         RefreshToken token = new RefreshToken();
-        token.setUsername(admin.getUsername());
         token.setToken(refreshToken);
+        token.setUsername(admin.getUsername());
+        token.setExpiresAt(Instant.now().plusSeconds(30L * 24 * 60 * 60)); // 30 days
         token.setRevoked(false);
+
         refreshTokenRepository.save(token);
 
-        return new TokenResponseDto(accessToken, refreshToken, 900);
+        return new TokenResponseDto(
+                accessToken,
+                refreshToken,
+                900 // 15 minutes
+        );
     }
 
+    // 🔄 REFRESH
     public TokenResponseDto refresh(String refreshToken) {
 
-    RefreshToken stored = refreshTokenRepository.findByToken(refreshToken)
-            .orElseThrow(() -> new RuntimeException("Invalid refresh token"));
+        RefreshToken stored = refreshTokenRepository.findByToken(refreshToken)
+                .orElseThrow(() -> new RuntimeException("Invalid refresh token"));
 
-    if (stored.isRevoked() || stored.getExpiresAt().isBefore(java.time.Instant.now())) {
-        throw new RuntimeException("Refresh token expired or revoked");
+        if (stored.isRevoked() || stored.getExpiresAt().isBefore(Instant.now())) {
+            throw new RuntimeException("Refresh token expired or revoked");
+        }
+
+        String newAccessToken = jwtService.generateAccessToken(stored.getUsername());
+
+        return new TokenResponseDto(
+                newAccessToken,
+                refreshToken,
+                900
+        );
     }
 
-    String newAccessToken = jwtService.generateAccessToken(stored.getUsername());
-    String newRefreshToken = jwtService.generateRefreshToken(stored.getUsername());
+    // 🚪 LOGOUT
+    public void logout(String refreshToken) {
 
-    stored.setRevoked(true);
-    refreshTokenRepository.save(stored);
+        RefreshToken token = refreshTokenRepository.findByToken(refreshToken)
+                .orElseThrow(() -> new RuntimeException("Invalid refresh token"));
 
-    RefreshToken newToken = new RefreshToken();
-    newToken.setUsername(stored.getUsername());
-    newToken.setToken(newRefreshToken);
-    newToken.setRevoked(false);
-    refreshTokenRepository.save(newToken);
-
-    return new TokenResponseDto(newAccessToken, newRefreshToken, 900);
-}
-
-public void logout(String refreshToken) {
-    refreshTokenRepository.findByToken(refreshToken)
-            .ifPresent(token -> {
-                token.setRevoked(true);
-                refreshTokenRepository.save(token);
-            });
-}
-
+        token.setRevoked(true);
+        refreshTokenRepository.save(token);
+    }
 }

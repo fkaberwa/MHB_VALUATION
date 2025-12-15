@@ -11,7 +11,7 @@ public class RefreshToken {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 500)
     private String token;
 
     @Column(nullable = false)
@@ -23,8 +23,7 @@ public class RefreshToken {
     @Column(nullable = false)
     private boolean revoked = false;
 
-    // ===== GETTERS & SETTERS =====
-
+    //Getters and Setters
     public Long getId() {
         return id;
     }

@@ -12,4 +12,4 @@ server:
 
 jwt:
   access-token-expiration-ms: 900000      # ← 15 minutes only
-  refresh-token-expiration-ms: 2592000000 # ← 30 days (recommended)
+  refresh-token-expiration-ms: 604800000  # ← 7 days
