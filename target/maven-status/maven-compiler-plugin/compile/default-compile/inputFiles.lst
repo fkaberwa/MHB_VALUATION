@@ -1,26 +1,38 @@
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\config\CorsConfig.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\dto\CustomerCreationDto.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\controller\ValuationFormController.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\security\JwtAuthFilter.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\dto\StaffResponseDto.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\repository\StaffRepository.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\config\SecurityConfig.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\entity\Customer.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\dto\AuthResponseDto.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\controller\CustomerController.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\security\JwtService.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\repository\CustomerRepository.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\exception\GlobalExceptionHandler.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\dto\LoginRequestDto.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\security\JwtKeyManager.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\dto\StaffCreationDto.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\entity\Staff.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\Mapper\CustomerMapper.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\config\DataInitializer.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\config\JwtProperties.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\controller\AuthController.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\config\DataSeeder.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\MhbApplication.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\entity\ValuationForm.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\repository\ValuationFormRepository.java
-C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\security\StaffUserDetailsService.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/MhbApplication.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/config/CorsConfig.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/config/JwtProperties.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/config/OpenApiInfo.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/config/SecurityConfig.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/config/SwaggerConfig.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/controller/AuthController.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/controller/CustomerController.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/controller/ValuationController.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/dto/auth/LoginRequestDto.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/dto/auth/TokenResponseDto.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/dto/customer/CustomerCreateDto.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/dto/customer/CustomerResponseDto.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/dto/valuation/ValuationCreateDto.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/dto/valuation/ValuationResponseDto.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/entity/Admin.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/entity/Customer.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/entity/RefreshToken.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/entity/ValuationForm.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/entity/enums/CollateralType.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/entity/enums/Gender.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/entity/enums/OwnershipType.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/entity/enums/ValuationStatus.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/exception/GlobalExceptionHandler.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/mapper/CustomerMapper.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/mapper/ValuationMapper.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/repository/AdminRepository.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/repository/CustomerRepository.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/repository/RefreshTokenRepository.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/repository/ValuationRepository.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/security/CustomUserDetailsService.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/security/JwtAuthFilter.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/security/JwtKeyManager.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/security/JwtService.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/seeder/AdminSeeder.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/service/AuthService.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/service/CustomerService.java
+/Users/mac/MHB_VALUATION/src/main/java/com/example/mhb/service/ValuationService.java

@@ -1,16 +1,20 @@
 package com.example.mhb.dto.auth;
 
-import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
-import lombok.*;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@Schema(description = "Login request payload")
 public class LoginRequestDto {
-    @NotBlank
+
+    @NotBlank(message = "Username is required")
+    @Schema(example = "admin")
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "Password is required")
+    @Schema(example = "Admin@123")
     private String password;
 }

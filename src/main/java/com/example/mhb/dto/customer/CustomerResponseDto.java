@@ -1,6 +1,6 @@
 package com.example.mhb.dto.customer;
 
-import com.example.mhb.enums.Gender;
+import com.example.mhb.entity.enums.Gender;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Schema(description = "Customer response object")
+@Schema(description = "Customer response payload")
 public class CustomerResponseDto {
 
     private Long id;

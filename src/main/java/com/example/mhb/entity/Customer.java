@@ -1,61 +1,64 @@
 package com.example.mhb.entity;
 
-import com.example.mhb.enums.Gender;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.LocalDateTime;
 
 @Entity
-@Table(
-    name = "customers",
-    indexes = {
-        @Index(columnList = "nida", unique = true),
-        @Index(columnList = "contact", unique = true)
-    }
-)
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table(name = "customers")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
-
-    @Column(unique = true)
     private String nida;
-
-    @Column(nullable = false, unique = true)
     private String contact;
+    private String gender;
+    private String idType;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Gender gender;
+    // ===== GETTERS & SETTERS =====
 
-    @Column(nullable = false)
-    private String idType; // NIDA | BLANK
-
-    // === AUDIT ===
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = this.createdAt;
+    public Long getId() {
+        return id;
     }
 
-    @PreUpdate
-    void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNida() {
+        return nida;
+    }
+
+    public void setNida(String nida) {
+        this.nida = nida;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getIdType() {
+        return idType;
+    }
+
+    public void setIdType(String idType) {
+        this.idType = idType;
     }
 }

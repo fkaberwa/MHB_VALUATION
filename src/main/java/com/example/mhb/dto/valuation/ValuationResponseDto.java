@@ -1,6 +1,7 @@
 package com.example.mhb.dto.valuation;
 
-import com.example.mhb.enums.*;
+import com.example.mhb.entity.enums.*;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +10,11 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Schema(description = "Valuation form response payload")
 public class ValuationResponseDto {
 
     private Long id;
-
     private Long customerId;
-    private String customerName;
 
     private CollateralType collateralType;
     private OwnershipType ownershipType;
@@ -33,6 +33,5 @@ public class ValuationResponseDto {
     private ValuationStatus status;
 
     private LocalDateTime createdAt;
-    private LocalDateTime approvedAt;
-    private LocalDateTime rejectedAt;
+    private LocalDateTime updatedAt;
 }

@@ -1,78 +1,144 @@
 package com.example.mhb.entity;
 
-import com.example.mhb.enums.*;
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "valuation_forms")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table(name = "valuations")
 public class ValuationForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // === RELATIONSHIP ===
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false)
+    @ManyToOne(optional = false)
     private Customer customer;
 
-    // === COLLATERAL ===
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private CollateralType collateralType;
+    private String collateralType;
+    private String ownershipType;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private OwnershipType ownershipType;
-
-    // === OWNERSHIP DETAILS ===
-    private String ownerFullName;              // SINGLE
-    private String spouseOneName;              // MATRIMONIAL
+    private String ownerFullName;
+    private String spouseOneName;
     private String spouseTwoName;
 
-    @Column(columnDefinition = "TEXT")
-    private String groupOwners;                // GROUP (comma separated)
+    private String groupOwners;
 
-    private String companyName;                // COMPANY
+    private String companyName;
     private String companyPhone;
-    private String companyDirectors;            // comma separated
+    private String companyDirectors;
 
-    // === VALUES ===
-    @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal forcedSaleValue;
+    private BigDecimal marketValue;
 
-    @Column(precision = 15, scale = 2)
-    private BigDecimal marketValue;             // REQUIRED IF APPROVED
+    private String status;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ValuationStatus status;
+    // ===== GETTERS & SETTERS =====
 
-    // === AUDIT ===
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-    private LocalDateTime approvedAt;
-    private LocalDateTime rejectedAt;
-    private LocalDateTime deletedAt;
-
-    @PrePersist
-    void onCreate() {
-        this.createdAt = LocalDateTime.now();
+    public Long getId() {
+        return id;
     }
 
-    @PreUpdate
-    void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public String getCollateralType() {
+        return collateralType;
+    }
+
+    public void setCollateralType(String collateralType) {
+        this.collateralType = collateralType;
+    }
+
+    public String getOwnershipType() {
+        return ownershipType;
+    }
+
+    public void setOwnershipType(String ownershipType) {
+        this.ownershipType = ownershipType;
+    }
+
+    public String getOwnerFullName() {
+        return ownerFullName;
+    }
+
+    public void setOwnerFullName(String ownerFullName) {
+        this.ownerFullName = ownerFullName;
+    }
+
+    public String getSpouseOneName() {
+        return spouseOneName;
+    }
+
+    public void setSpouseOneName(String spouseOneName) {
+        this.spouseOneName = spouseOneName;
+    }
+
+    public String getSpouseTwoName() {
+        return spouseTwoName;
+    }
+
+    public void setSpouseTwoName(String spouseTwoName) {
+        this.spouseTwoName = spouseTwoName;
+    }
+
+    public String getGroupOwners() {
+        return groupOwners;
+    }
+
+    public void setGroupOwners(String groupOwners) {
+        this.groupOwners = groupOwners;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyPhone() {
+        return companyPhone;
+    }
+
+    public void setCompanyPhone(String companyPhone) {
+        this.companyPhone = companyPhone;
+    }
+
+    public String getCompanyDirectors() {
+        return companyDirectors;
+    }
+
+    public void setCompanyDirectors(String companyDirectors) {
+        this.companyDirectors = companyDirectors;
+    }
+
+    public BigDecimal getForcedSaleValue() {
+        return forcedSaleValue;
+    }
+
+    public void setForcedSaleValue(BigDecimal forcedSaleValue) {
+        this.forcedSaleValue = forcedSaleValue;
+    }
+
+    public BigDecimal getMarketValue() {
+        return marketValue;
+    }
+
+    public void setMarketValue(BigDecimal marketValue) {
+        this.marketValue = marketValue;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

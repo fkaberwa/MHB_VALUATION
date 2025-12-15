@@ -1,0 +1,25 @@
+{
+  "groups": [
+    {
+      "name": "jwt",
+      "type": "com.example.mhb.config.JwtProperties",
+      "sourceType": "com.example.mhb.config.JwtProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwt.access-token-expiration-ms",
+      "type": "java.lang.Long",
+      "sourceType": "com.example.mhb.config.JwtProperties"
+    },
+    {
+      "name": "jwt.refresh-token-expiration-ms",
+      "type": "java.lang.Long",
+      "sourceType": "com.example.mhb.config.JwtProperties"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

@@ -11,19 +11,16 @@ public class CustomerMapper {
         c.setNida(dto.getNida());
         c.setContact(dto.getContact());
         c.setGender(dto.getGender());
-        c.setIdType(dto.getNida() != null && !dto.getNida().isBlank() ? "NIDA" : "Blank");
+        c.setIdType(dto.getNida() != null && !dto.getNida().isBlank() ? "NIDA" : "NONE");
         return c;
     }
 
-    public static CustomerCreateDto toDto(Customer entity) {
+    public static CustomerCreateDto toDto(Customer c) {
         CustomerCreateDto dto = new CustomerCreateDto();
-        dto.setId(entity.getId());
-        dto.setName(entity.getName());
-        dto.setNida(entity.getNida());
-        dto.setContact(entity.getContact());
-        dto.setGender(entity.getGender());
-        dto.setIdType(entity.getIdType() != null ? entity.getIdType() : "Blank");
-        dto.setVersion(entity.getVersion() != null ? entity.getVersion().toString() : "0");
+        dto.setName(c.getName());
+        dto.setNida(c.getNida());
+        dto.setContact(c.getContact());
+        dto.setGender(c.getGender());
         return dto;
     }
 }

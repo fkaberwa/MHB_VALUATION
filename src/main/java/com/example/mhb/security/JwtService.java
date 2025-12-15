@@ -1,10 +1,8 @@
 package com.example.mhb.security;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
-import com.example.mhb.config.JwtProperties;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -12,76 +10,41 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private final JwtProperties props;
-    private final SecretKey currentKey;
-    private final SecretKey previousKey;
+    private final SecretKey key;
 
-    public JwtService(JwtProperties props) {
-        this.props = props;
-
-        // Current key (always exists)
-        this.currentKey = Keys.hmacShaKeyFor(
-                Decoders.BASE64.decode(props.getCurrentSecret())
-        );
-
-        // Previous key (may be null on first start)
-        String prev = props.getPreviousSecret();
-        this.previousKey = (prev != null && !prev.isBlank())
-                ? Keys.hmacShaKeyFor(Decoders.BASE64.decode(prev))
-                : null;
+    public JwtService(JwtKeyManager km) {
+        this.key = Keys.hmacShaKeyFor(km.getSecret().getBytes());
     }
 
     public String generateAccessToken(String username) {
-        long now = System.currentTimeMillis();
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date(now))
-                .setExpiration(new Date(now + props.getAccessTokenExpirationMs())) // 10 minutes
-                .signWith(currentKey, SignatureAlgorithm.HS256)
-                .compact();
+            .setSubject(username)
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + 15 * 60 * 1000))
+            .signWith(key, SignatureAlgorithm.HS256)
+            .compact();
     }
 
     public String generateRefreshToken(String username) {
-        long now = System.currentTimeMillis();
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date(now))
-                .setExpiration(new Date(now + props.getRefreshTokenExpirationMs())) // 30 days
-                .signWith(currentKey, SignatureAlgorithm.HS256)
-                .compact();
+            .setSubject(username)
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000))
+            .signWith(key, SignatureAlgorithm.HS256)
+            .compact();
     }
 
     public String extractUsername(String token) {
-        return parseWithFallback(token).getBody().getSubject();
+        return Jwts.parserBuilder().setSigningKey(key).build()
+            .parseClaimsJws(token).getBody().getSubject();
     }
 
-    public boolean isTokenValid(String token, String username) {
+    public boolean isValid(String token) {
         try {
-            String extracted = extractUsername(token);
-            return extracted.equals(username) && !isTokenExpired(token);
+            extractUsername(token);
+            return true;
         } catch (Exception e) {
             return false;
-        }
-    }
-
-    private boolean isTokenExpired(String token) {
-        return parseWithFallback(token).getBody().getExpiration().before(new Date());
-    }
-
-    private Jws<Claims> parseWithFallback(String token) {
-        try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(currentKey)
-                    .build()
-                    .parseClaimsJws(token);
-        } catch (JwtException e) {
-            if (previousKey != null) {
-                return Jwts.parserBuilder()
-                        .setSigningKey(previousKey)
-                        .build()
-                        .parseClaimsJws(token);
-            }
-            throw e;
         }
     }
 }
