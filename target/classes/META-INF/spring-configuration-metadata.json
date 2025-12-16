@@ -2,22 +2,27 @@
   "groups": [
     {
       "name": "jwt",
-      "type": "com.example.mhb.config.JwtProperties",
-      "sourceType": "com.example.mhb.config.JwtProperties"
+      "type": "com.example.mhb.security.JwtProperties",
+      "sourceType": "com.example.mhb.security.JwtProperties"
     }
   ],
   "properties": [
     {
       "name": "jwt.access-token-expiration-ms",
       "type": "java.lang.Long",
-      "sourceType": "com.example.mhb.config.JwtProperties",
-      "defaultValue": 900000
+      "sourceType": "com.example.mhb.security.JwtProperties",
+      "defaultValue": 0
     },
     {
       "name": "jwt.refresh-token-expiration-ms",
       "type": "java.lang.Long",
-      "sourceType": "com.example.mhb.config.JwtProperties",
-      "defaultValue": 2592000000
+      "sourceType": "com.example.mhb.security.JwtProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "sourceType": "com.example.mhb.security.JwtProperties"
     }
   ],
   "hints": [],

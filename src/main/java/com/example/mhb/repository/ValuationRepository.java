@@ -7,5 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ValuationRepository extends JpaRepository<ValuationForm, Long> {
 
-    Page<ValuationForm> findByCustomer_NameContainingIgnoreCase(String name, Pageable pageable);
+    // 🔍 Search by CUSTOMER NIDA
+    Page<ValuationForm> findByCustomer_NidaContainingIgnoreCase(
+            String nida,
+            Pageable pageable
+    );
 }

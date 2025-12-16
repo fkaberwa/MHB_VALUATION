@@ -9,9 +9,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Optional<Customer> findByNida(String nida);
 
-    Optional<Customer> findByContact(String contact);
-
     boolean existsByNida(String nida);
-
-    boolean existsByContact(String contact);
 }

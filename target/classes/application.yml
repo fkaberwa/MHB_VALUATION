@@ -3,7 +3,7 @@ spring:
     url: jdbc:postgresql://localhost:5433/mhbdb
     username: postgres
     password: 1234
-  jpa: 
+  jpa:
     hibernate:
       ddl-auto: update
 
@@ -11,5 +11,6 @@ server:
   port: 8080
 
 jwt:
-  access-token-expiration-ms: 900000      # ← 15 minutes only
-  refresh-token-expiration-ms: 604800000  # ← 7 days
+  secret: YjI0Y2IzNmM5ZDUxNGJjZmQ1OWU4MTY0NzZkYjQ2NzJhYmY4YzY3ZDUxMzFlYjU0ZTQyODRhZWE5YQ==
+  access-token-expiration-ms: 900000        # 15 minutes
+  refresh-token-expiration-ms: 604800000    # 7 days

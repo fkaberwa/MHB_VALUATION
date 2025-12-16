@@ -33,6 +33,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+
                 // ✅ Swagger
                 .requestMatchers(
                     "/swagger-ui.html",
@@ -47,13 +48,16 @@ public class SecurityConfig {
                     "/v3/api-docs/**"
                 ).permitAll()
 
-                // ✅ Auth endpoints
+                // Auth
                 .requestMatchers(
-                    "/api/auth/login",
-                    "/api/auth/refresh"
+                    "/api/auth/**"
                 ).permitAll()
 
-                // 🔒 Everything else
+                // Valuations API
+                .requestMatchers(
+                    "/api/valuations/**"
+                ).authenticated()
+
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
@@ -80,7 +84,6 @@ public class SecurityConfig {
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
-
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();

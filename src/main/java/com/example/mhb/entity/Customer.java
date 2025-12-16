@@ -1,66 +1,27 @@
 package com.example.mhb.entity;
 
 import jakarta.persistence.*;
-import com.example.mhb.entity.enums.Gender;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "customers")
+@Getter
+@Setter
+@Table(name = "customer")
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String nida;
-    private String contact;
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
-    private String idType;
+    @Column(nullable = false)
+    private String fullName;
 
-    // ===== GETTERS & SETTERS =====
+    @Column(nullable = false, unique = true)
+    private String nida;     // ✅ REQUIRED
 
-    public Long getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private String phone;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNida() {
-        return nida;
-    }
-
-    public void setNida(String nida) {
-        this.nida = nida;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public String getIdType() {
-        return idType;
-    }
-
-    public void setIdType(String idType) {
-        this.idType = idType;
-    }
+    private String maritalStatus;
 }

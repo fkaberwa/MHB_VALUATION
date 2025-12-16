@@ -5,6 +5,7 @@ import com.example.mhb.dto.auth.TokenResponseDto;
 import com.example.mhb.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -39,4 +40,14 @@ public class AuthController {
         authService.logout(token);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<String> me(Authentication authentication) {
+        if (authentication == null) {
+            return ResponseEntity.status(401).body("unauthenticated");
+        }
+        return ResponseEntity.ok(authentication.getName());
+    }
+
 }
+
