@@ -7,20 +7,20 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "customer")
+@Table(
+    uniqueConstraints = @UniqueConstraint(columnNames = "nida")
+)
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false, unique = true)
-    private String nida;     // ✅ REQUIRED
+    @Column(nullable = false, length = 20)
+    private String nida;
 
-    @Column(nullable = false)
     private String phone;
 
     private String maritalStatus;

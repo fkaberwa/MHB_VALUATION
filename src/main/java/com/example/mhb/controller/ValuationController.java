@@ -21,8 +21,8 @@ public class ValuationController {
         this.valuationService = valuationService;
     }
 
-    // ================= CREATE =================
-    @PostMapping
+    /* ================= CREATE ================= */
+    @PostMapping("/create")
     public ResponseEntity<ValuationResponseDto> create(
             @RequestBody ValuationCreateDto dto
     ) {
@@ -32,41 +32,36 @@ public class ValuationController {
                 .body(ValuationMapper.toDto(saved));
     }
 
-    // ================= GET ALL =================
-    @GetMapping
-    public ResponseEntity<List<ValuationResponseDto>> getAll() {
-        List<ValuationResponseDto> list = valuationService.findAll()
+    /* ================= READ ================= */
+    @GetMapping("/list")
+    public List<ValuationResponseDto> findAll() {
+        return valuationService.findAll()
                 .stream()
                 .map(ValuationMapper::toDto)
                 .toList();
-
-        return ResponseEntity.ok(list);
     }
 
-    // ================= GET BY ID =================
     @GetMapping("/{id}")
-    public ResponseEntity<ValuationResponseDto> getById(
-            @PathVariable Long id
-    ) {
-        ValuationForm valuation = valuationService.findById(id);
-        return ResponseEntity.ok(ValuationMapper.toDto(valuation));
+    public ValuationResponseDto findById(@PathVariable Long id) {
+        return ValuationMapper.toDto(
+                valuationService.findById(id)
+        );
     }
 
-    // ================= PARTIAL UPDATE =================
-    @PatchMapping("/{id}")
-    public ResponseEntity<ValuationResponseDto> partialUpdate(
+    /* ================= PARTIAL UPDATE ================= */
+    @PatchMapping("/update/{id}")
+    public ValuationResponseDto partialUpdate(
             @PathVariable Long id,
             @RequestBody ValuationCreateDto dto
     ) {
-        ValuationForm updated = valuationService.partialUpdate(id, dto);
-        return ResponseEntity.ok(ValuationMapper.toDto(updated));
+        return ValuationMapper.toDto(
+                valuationService.partialUpdate(id, dto)
+        );
     }
 
-    // ================= DELETE =================
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(
-            @PathVariable Long id
-    ) {
+    /* ================= DELETE ================= */
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         valuationService.delete(id);
         return ResponseEntity.noContent().build();
     }

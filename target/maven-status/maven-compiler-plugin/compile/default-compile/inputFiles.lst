@@ -7,6 +7,7 @@ C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\j
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\dto\valuation\ValuationCreateDto.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\dto\valuation\ValuationResponseDto.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\entity\Admin.java
+C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\entity\AuditLog.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\entity\Customer.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\entity\enums\CollateralType.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\entity\enums\OwnershipCategory.java
@@ -16,6 +17,7 @@ C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\j
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\mapper\ValuationMapper.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\MhbApplication.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\repository\AdminRepository.java
+C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\repository\AuditRepository.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\repository\CustomerRepository.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\repository\RefreshTokenRepository.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\repository\ValuationRepository.java
@@ -24,5 +26,6 @@ C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\j
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\security\JwtProperties.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\security\JwtService.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\seeder\AdminSeeder.java
+C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\service\AuditService.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\service\AuthService.java
 C:\Users\fkaberwa\OneDrive - Mwanga Hakika Bank\Desktop\MHB_VALUATION\src\main\java\com\example\mhb\service\ValuationService.java
