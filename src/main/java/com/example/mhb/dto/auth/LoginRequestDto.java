@@ -1,20 +1,34 @@
 package com.example.mhb.dto.auth;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-@Schema(description = "Login request payload")
 public class LoginRequestDto {
 
-    @NotBlank(message = "Username is required")
-    @Schema(example = "admin")
     private String username;
-
-    @NotBlank(message = "Password is required")
-    @Schema(example = "Admin@123")
     private String password;
+    private String role; // ✅ REQUIRED
+
+    public LoginRequestDto() {}
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+ 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

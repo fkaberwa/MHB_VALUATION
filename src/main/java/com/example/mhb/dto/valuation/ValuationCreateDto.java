@@ -3,7 +3,7 @@ package com.example.mhb.dto.valuation;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -32,5 +32,5 @@ public class ValuationCreateDto {
 
     private Double forcedSaleValue;
 
-    private Instant expiresAt;
+    private LocalDate expiresAt;
 }

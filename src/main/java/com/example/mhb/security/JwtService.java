@@ -1,73 +1,52 @@
 package com.example.mhb.security;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Date;
 
 @Service
 public class JwtService {
 
-    private final SecretKey secretKey;
-    private final long accessTokenExpirationMs;
-    private final long refreshTokenExpirationMs;
+    private static final String SECRET =
+            "mhb-valuation-secret-key-very-long-and-safe-123456";
 
-    public JwtService(
-            @Value("${jwt.access-token-expiration-ms}") long accessTokenExpirationMs,
-            @Value("${jwt.refresh-token-expiration-ms}") long refreshTokenExpirationMs
-    ) {
-        // ✅ SIMPLE STATIC SECRET (no JwtKeyManager needed)
-        this.secretKey = Keys.hmacShaKeyFor(
-                "THIS_IS_A_SECURE_256_BIT_SECRET_KEY_FOR_JWT_123456".getBytes()
-        );
-        this.accessTokenExpirationMs = accessTokenExpirationMs;
-        this.refreshTokenExpirationMs = refreshTokenExpirationMs;
+    private static final long EXPIRATION = 1000 * 60 * 60 * 8; // 8 hours
+
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
-    // 🔑 ACCESS TOKEN
-    public String generateAccessToken(String username) {
+    public String generateToken(String username, String role) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("role", role)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpirationMs))
-                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    // 🔁 REFRESH TOKEN (FIXED)
-    public String generateRefreshToken(String username) {
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpirationMs))
-                .signWith(secretKey, SignatureAlgorithm.HS256)
-                .compact();
-    }
-
-    // 🔍 EXTRACT USERNAME
     public String extractUsername(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(secretKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        return parseClaims(token).getSubject();
     }
 
-    // ✅ VALIDATE TOKEN
-    public boolean isValid(String token) {
+    public boolean isTokenValid(String token) {
         try {
-            Jwts.parserBuilder()
-                    .setSigningKey(secretKey)
-                    .build()
-                    .parseClaimsJws(token);
+            parseClaims(token);
             return true;
-        } catch (Exception e) {
+        } catch (JwtException e) {
             return false;
         }
+    }
+
+    private Claims parseClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 }

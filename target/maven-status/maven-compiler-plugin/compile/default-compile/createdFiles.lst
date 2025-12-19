@@ -15,15 +15,12 @@ com\example\mhb\entity\ValuationForm.class
 com\example\mhb\mapper\ValuationMapper.class
 com\example\mhb\entity\Customer.class
 com\example\mhb\MhbApplication.class
-com\example\mhb\seeder\AdminSeeder.class
 com\example\mhb\repository\ValuationRepository.class
 com\example\mhb\dto\auth\LoginRequestDto.class
 com\example\mhb\dto\auth\TokenResponseDto.class
 com\example\mhb\security\JwtAuthFilter.class
 com\example\mhb\security\CustomUserDetailsService.class
 com\example\mhb\dto\valuation\ValuationCreateDto.class
-com\example\mhb\entity\Admin.class
 com\example\mhb\entity\enums\OwnershipCategory.class
 com\example\mhb\exception\GlobalExceptionHandler.class
 com\example\mhb\repository\RefreshTokenRepository.class
-com\example\mhb\repository\AdminRepository.class

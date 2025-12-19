@@ -1,36 +1,43 @@
 package com.example.mhb.seeder;
 
+import com.example.mhb.entity.Role;
 import com.example.mhb.entity.User;
 import com.example.mhb.repository.UserRepository;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import jakarta.annotation.PostConstruct;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class DataSeeder {
 
-    @Bean
-    CommandLineRunner seedUsers(
-            UserRepository userRepository,
-            PasswordEncoder encoder
-    ) {
-        return args -> {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-            if (userRepository.count() == 0) {
+    public DataSeeder(UserRepository userRepository,
+                      PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-                User admin = new User();
-                admin.setUsername("mmihayo");
-                admin.setPassword(encoder.encode("Admin@123"));
-                admin.setRole("ADMIN");
-                userRepository.save(admin);
+    @PostConstruct
+    public void seedUsers() {
 
-                User approver = new User();
-                approver.setUsername("mfreddy");
-                approver.setPassword(encoder.encode("Approver@123"));
-                approver.setRole("APPROVER");
-                userRepository.save(approver);
-            }
-        };
+        if (userRepository.findByUsername("admin").isEmpty()) {
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(passwordEncoder.encode("admin123"));
+            admin.setRole(Role.ADMIN);
+            admin.setEnabled(true);
+            userRepository.save(admin);
+        }
+
+        if (userRepository.findByUsername("approver").isEmpty()) {
+            User approver = new User();
+            approver.setUsername("approver");
+            approver.setPassword(passwordEncoder.encode("approver123"));
+            approver.setRole(Role.APPROVER);
+            approver.setEnabled(true);
+            userRepository.save(approver);
+        }
     }
 }
