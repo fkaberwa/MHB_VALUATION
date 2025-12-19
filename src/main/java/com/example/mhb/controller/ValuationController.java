@@ -21,7 +21,7 @@ public class ValuationController {
         this.valuationService = valuationService;
     }
 
-    /* ================= CREATE ================= */
+    /* ================= CREATE (ADMIN) ================= */
     @PostMapping("/create")
     public ResponseEntity<ValuationResponseDto> create(
             @RequestBody ValuationCreateDto dto
@@ -32,7 +32,7 @@ public class ValuationController {
                 .body(ValuationMapper.toDto(saved));
     }
 
-    /* ================= READ ================= */
+    /* ================= READ ALL (ADMIN + APPROVER) ================= */
     @GetMapping("/list")
     public List<ValuationResponseDto> findAll() {
         return valuationService.findAll()
@@ -41,14 +41,15 @@ public class ValuationController {
                 .toList();
     }
 
-    @GetMapping("/{id}")
+    /* ================= READ ONE (ADMIN + APPROVER) ================= */
+    @GetMapping("/view/{id}")
     public ValuationResponseDto findById(@PathVariable Long id) {
         return ValuationMapper.toDto(
                 valuationService.findById(id)
         );
     }
 
-    /* ================= PARTIAL UPDATE ================= */
+    /* ================= PARTIAL UPDATE (ADMIN) ================= */
     @PatchMapping("/update/{id}")
     public ValuationResponseDto partialUpdate(
             @PathVariable Long id,
@@ -59,10 +60,35 @@ public class ValuationController {
         );
     }
 
-    /* ================= DELETE ================= */
+    /* ================= DELETE (ADMIN) ================= */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         valuationService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    /* ================= PENDING (APPROVER) ================= */
+    @GetMapping("/pending")
+    public List<ValuationResponseDto> pendingApprovals() {
+        return valuationService.findByStatus("PENDING")
+                .stream()
+                .map(ValuationMapper::toDto)
+                .toList();
+    }
+
+    /* ================= APPROVE (APPROVER) ================= */
+    @PutMapping("/approve/{id}")
+    public ValuationResponseDto approve(@PathVariable Long id) {
+        return ValuationMapper.toDto(
+                valuationService.updateStatus(id, "APPROVED")
+        );
+    }
+
+    /* ================= REJECT (APPROVER) ================= */
+    @PutMapping("/reject/{id}")
+    public ValuationResponseDto reject(@PathVariable Long id) {
+        return ValuationMapper.toDto(
+                valuationService.updateStatus(id, "REJECTED")
+        );
     }
 }

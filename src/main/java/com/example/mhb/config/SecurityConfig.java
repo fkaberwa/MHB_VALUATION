@@ -3,6 +3,7 @@ package com.example.mhb.config;
 import com.example.mhb.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,7 +26,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
             .csrf(csrf -> csrf.disable())
@@ -35,28 +36,35 @@ public class SecurityConfig {
             )
             .authorizeHttpRequests(auth -> auth
 
-                // 🔓 AUTH
+                /* ================= AUTH ================= */
                 .requestMatchers("/api/auth/**").permitAll()
 
-                // 👑 ADMIN ONLY
-                .requestMatchers(
-                        "/api/valuations/create",
-                        "/api/valuations/update/**",
-                        "/api/valuations/delete/**"
-                ).hasRole("ADMIN")
+                /* ================= ADMIN ================= */
+                .requestMatchers(HttpMethod.POST, "/api/valuations/create")
+                    .hasRole("ADMIN")
 
-                // 👁 ADMIN + APPROVER (READ)
-                .requestMatchers(
-                        "/api/valuations/list",
-                        "/api/valuations/{id}"
-                ).hasAnyRole("ADMIN", "APPROVER")
+                .requestMatchers(HttpMethod.PATCH, "/api/valuations/update/**")
+                    .hasRole("ADMIN")
 
-                // ✅ APPROVER ONLY (APPROVAL)
-                .requestMatchers(
-                        "/api/valuations/approve/**",
-                        "/api/valuations/reject/**",
-                        "/api/valuations/pending"
-                ).hasRole("APPROVER")
+                .requestMatchers(HttpMethod.DELETE, "/api/valuations/delete/**")
+                    .hasRole("ADMIN")
+
+                /* ================= READ (ADMIN + APPROVER) ================= */
+                .requestMatchers(HttpMethod.GET, "/api/valuations/list")
+                    .hasAnyRole("ADMIN", "APPROVER")
+
+                .requestMatchers(HttpMethod.GET, "/api/valuations/view/**")
+                    .hasAnyRole("ADMIN", "APPROVER")
+
+                /* ================= APPROVER ================= */
+                .requestMatchers(HttpMethod.GET, "/api/valuations/pending")
+                    .hasRole("APPROVER")
+
+                .requestMatchers(HttpMethod.PUT, "/api/valuations/approve/**")
+                    .hasRole("APPROVER")
+
+                .requestMatchers(HttpMethod.PUT, "/api/valuations/reject/**")
+                    .hasRole("APPROVER")
 
                 .anyRequest().authenticated()
             )
