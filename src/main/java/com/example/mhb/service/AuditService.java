@@ -1,15 +1,15 @@
 package com.example.mhb.service;
 
 import com.example.mhb.entity.AuditLog;
-import com.example.mhb.repository.AuditRepository;
+import com.example.mhb.repository.AuditLogRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuditService {
 
-    private final AuditRepository auditRepository;
+    private final AuditLogRepository auditRepository;
 
-    public AuditService(AuditRepository auditRepository) {
+    public AuditService(AuditLogRepository auditRepository) {
         this.auditRepository = auditRepository;
     }
 

@@ -24,24 +24,13 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public LoginResponseDto login(
-            String username,
-            String password,
-            String role
-    ) {
+    public LoginResponseDto login(String username, String password) {
 
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() ->
-                        new RuntimeException("Invalid username or password")
-                );
+                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Invalid username or password");
-        }
-
-        // 🔐 ROLE CHECK (VERY IMPORTANT)
-        if (!user.getRole().name().equalsIgnoreCase(role)) {
-            throw new RuntimeException("You are not authorized for this role");
+            throw new RuntimeException("Invalid credentials");
         }
 
         String token = jwtService.generateToken(
@@ -52,7 +41,7 @@ public class AuthService {
         return new LoginResponseDto(
                 token,
                 user.getUsername(),
-                user.getRole().name().toLowerCase()
+                user.getRole().name()
         );
     }
 }

@@ -10,12 +10,14 @@
     {
       "name": "jwt.access-token-expiration-ms",
       "type": "java.lang.Long",
-      "sourceType": "com.example.mhb.security.JwtProperties"
+      "sourceType": "com.example.mhb.security.JwtProperties",
+      "defaultValue": 0
     },
     {
       "name": "jwt.refresh-token-expiration-ms",
       "type": "java.lang.Long",
-      "sourceType": "com.example.mhb.security.JwtProperties"
+      "sourceType": "com.example.mhb.security.JwtProperties",
+      "defaultValue": 0
     },
     {
       "name": "jwt.secret",

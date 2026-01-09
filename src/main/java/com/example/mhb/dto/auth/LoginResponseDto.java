@@ -3,36 +3,24 @@ package com.example.mhb.dto.auth;
 public class LoginResponseDto {
 
     private String accessToken;
-    private UserDetailsDto userDetails;
+    private String username;
+    private String role;
 
     public LoginResponseDto(String accessToken, String username, String role) {
         this.accessToken = accessToken;
-        this.userDetails = new UserDetailsDto(username, role);
+        this.username = username;
+        this.role = role;
     }
 
     public String getAccessToken() {
         return accessToken;
     }
 
-    public UserDetailsDto getUserDetails() {
-        return userDetails;
+    public String getUsername() {
+        return username;
     }
 
-    public static class UserDetailsDto {
-        private String username;
-        private String role;
-
-        public UserDetailsDto(String username, String role) {
-            this.username = username;
-            this.role = role;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public String getRole() {
-            return role;
-        }
+    public String getRole() {
+        return role;
     }
 }

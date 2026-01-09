@@ -2,6 +2,7 @@ package com.example.mhb.controller;
 
 import com.example.mhb.dto.auth.LoginRequestDto;
 import com.example.mhb.dto.auth.LoginResponseDto;
+import com.example.mhb.dto.common.ApiResponse;
 import com.example.mhb.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +19,17 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(
+    public ResponseEntity<ApiResponse<LoginResponseDto>> login(
             @RequestBody LoginRequestDto request
     ) {
-        LoginResponseDto response = authService.login(
-                request.getUsername(),
-                request.getPassword(),
-                request.getRole()
+        return ResponseEntity.ok(
+                ApiResponse.ok(
+                        "Login successful",
+                        authService.login(
+                                request.getUsername(),
+                                request.getPassword()
+                        )
+                )
         );
-
-        return ResponseEntity.ok(response);
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/api/valuations")
@@ -34,12 +36,17 @@ public class ValuationController {
 
     /* ================= READ ALL (ADMIN + APPROVER) ================= */
     @GetMapping("/list")
-    public List<ValuationResponseDto> findAll() {
-        return valuationService.findAll()
-                .stream()
-                .map(ValuationMapper::toDto)
-                .toList();
-    }
+public Map<String, Object> findAll() {
+    List<ValuationResponseDto> list = valuationService.findAll()
+        .stream()
+        .map(ValuationMapper::toDto)
+        .toList();
+
+    return Map.of(
+        "data", list,
+        "total", list.size()
+    );
+}
 
     /* ================= READ ONE (ADMIN + APPROVER) ================= */
     @GetMapping("/view/{id}")
@@ -49,17 +56,7 @@ public class ValuationController {
         );
     }
 
-    /* ================= PARTIAL UPDATE (ADMIN) ================= */
-    @PatchMapping("/update/{id}")
-    public ValuationResponseDto partialUpdate(
-            @PathVariable Long id,
-            @RequestBody ValuationCreateDto dto
-    ) {
-        return ValuationMapper.toDto(
-                valuationService.partialUpdate(id, dto)
-        );
-    }
-
+   
     /* ================= DELETE (ADMIN) ================= */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

@@ -19,12 +19,12 @@ public class ValuationForm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /* CUSTOMER */
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "customer_id")
+    /* ================= CUSTOMER ================= */
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    /* COLLATERAL */
+    /* ================= COLLATERAL ================= */
     private String collateralLocation;
 
     @Enumerated(EnumType.STRING)
@@ -33,34 +33,23 @@ public class ValuationForm {
     @Enumerated(EnumType.STRING)
     private OwnershipCategory ownershipCategory;
 
-    /* OWNER */
+    /* ================= OWNERSHIP ================= */
+    private Boolean ownerIsCustomer;
     private String ownerFullName;
     private String ownerPhone;
     private String ownerRelationship;
-    private Boolean ownerIsCustomer;
-
     private String partner1;
     private String partner2;
 
-    /* VALUE */
+    /* ================= VALUE ================= */
     @Column(precision = 19, scale = 2)
     private BigDecimal forcedSaleValue;
 
-    /* STATUS */
+    /* ================= STATUS ================= */
     private String status; // PENDING / APPROVED / REJECTED
 
-    /* DATES */
+    /* ================= DATES ================= */
     private Instant createdAt;
     private Instant updatedAt;
     private Instant expiresAt;
-
-    @PrePersist
-    void onCreate() {
-        this.createdAt = Instant.now();
-    }
-
-    @PreUpdate
-    void onUpdate() {
-        this.updatedAt = Instant.now();
-    }
 }
